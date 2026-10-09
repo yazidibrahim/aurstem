@@ -17,11 +17,12 @@ aurestem.com, www.aurestem.com {
 		-Server
 	}
 
-	# Long cache for images, short for html/css/js (files aren't hashed)
-	@assets path /assets/* /favicon.png
-	header @assets Cache-Control "public, max-age=2592000"
+	# Always revalidate html/css/js (Caddy sends ETags, so unchanged files cost almost nothing)
 	@code path *.css *.js *.html /
-	header @code Cache-Control "public, max-age=300"
+	header @code Cache-Control "no-cache"
+	# Images: 1 hour, then revalidate
+	@assets path /assets/* /favicon.png
+	header @assets Cache-Control "public, max-age=3600, must-revalidate"
 
 	handle_errors {
 		rewrite * /index.html
