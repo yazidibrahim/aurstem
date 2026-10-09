@@ -48,7 +48,7 @@ a{color:inherit;text-decoration:none}
 .crumb{font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:22px}
 .crumb b{color:var(--fg);font-weight:700}
 h1{font-size:clamp(40px,5.4vw,68px);line-height:1.04;letter-spacing:-.03em;font-weight:800}
-h1 em{font-style:normal;color:var(--leaf);position:relative;white-space:nowrap}
+h1 em{font-style:normal;color:var(--leaf);position:relative}
 .lead{margin:26px 0 34px;font-size:clamp(17px,1.5vw,20px);color:var(--muted);max-width:30em}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
 
@@ -320,3 +320,29 @@ a:hover>.more b,.more:hover b{transform:translateX(5px)}
   .photo.wide{aspect-ratio:16/10}
 }
 @media(max-width:620px){.f2,.icols{grid-template-columns:1fr}.form{padding:24px}.hero-foot .scroll{display:none}}
+
+/* certifications */
+.certs{padding:100px 0 20px;background:var(--bg2)}
+.certs .wrap{padding-bottom:90px}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.cert{background:var(--fg);color:var(--bg);border-radius:var(--r);padding:34px 28px;border:1px solid #c9a94a;outline:1px solid rgba(201,169,74,.35);outline-offset:-8px;text-align:center;transition:transform .4s var(--ease),box-shadow .4s}
+.cert:hover{transform:translateY(-6px);box-shadow:0 28px 50px -28px rgba(31,59,48,.7)}
+.seal{display:grid;place-items:center;width:92px;height:92px;margin:0 auto 22px;border-radius:50%;border:2px solid #d8b957;color:#e3c565;font-weight:800;font-size:22px;letter-spacing:.02em;transition:transform .5s var(--ease),background .3s,color .3s}
+.cert:hover .seal{transform:rotate(-8deg) scale(1.06);background:#d8b957;color:var(--fg)}
+.cert h3{font-size:18px;margin-bottom:10px}
+.cert p{font-size:13.5px;color:#b9c8bf;line-height:1.55}
+.certs .note{margin-top:30px}
+@media(max-width:960px){.cert-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.cert-grid{grid-template-columns:1fr}}
+.logo{display:block;margin:0 auto 22px;width:120px;background:url(assets/certs/marks-sheet.png) no-repeat;transition:transform .5s var(--ease)}
+.logo.round{border-radius:50%}
+.logo.rect{width:170px;border-radius:4px}
+.cert:hover .logo{transform:scale(1.07)}
+.logo.tile{width:120px;height:120px;background:#fff;border-radius:16px;overflow:hidden;display:grid;place-items:center;padding:12px}
+.logo.tile img{width:100%;height:100%;object-fit:contain}
+.logo.tile.zoom1 img{transform:scale(1.08)}
+.logo.tile.zoom2 img{transform:scale(1.9)}
+/* FDA: no tile — invert so the white PNG background turns black, then "screen" blend makes it vanish on the green card */
+.logo.tile.bare{background:none;padding:0;width:150px;height:120px;border-radius:0;overflow:visible;transition:none}
+.logo.tile.bare img{filter:grayscale(1) contrast(8) invert(1);mix-blend-mode:screen}
+.cert:hover .logo.tile.bare{transform:none}

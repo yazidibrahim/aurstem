@@ -1,0 +1,30 @@
+# Replace with your domain for automatic HTTPS (DNS A record must point to the Lightsail static IP,
+# and ports 80 + 443 must be open in the Lightsail firewall).
+# No domain yet? Use ":80" instead.
+aurestem.com, www.aurestem.com {
+	root * /var/www/aurestem
+	encode zstd gzip
+
+	# /solutions -> solutions.html
+	try_files {path} {path}.html {path}/index.html
+
+	file_server
+
+	header {
+		X-Content-Type-Options nosniff
+		X-Frame-Options SAMEORIGIN
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+
+	# Long cache for images, short for html/css/js (files aren't hashed)
+	@assets path /assets/* /favicon.png
+	header @assets Cache-Control "public, max-age=2592000"
+	@code path *.css *.js *.html /
+	header @code Cache-Control "public, max-age=300"
+
+	handle_errors {
+		rewrite * /index.html
+		file_server
+	}
+}
